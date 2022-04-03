@@ -9,14 +9,14 @@ function App() {
     return initialArray.map((number) => Math.floor(Math.random() * 6 + 1));
   }
 
-  console.log(dice);
+  const diceElements = dice.map((die) => {
+    return <Die value={die} />;
+  });
 
   return (
     <div className="container">
       <main className="main">
-        <div className="dice-container">
-          <Die value="1" />
-        </div>
+        <div className="dice-container">{diceElements}</div>
       </main>
     </div>
   );
