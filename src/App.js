@@ -5,15 +5,24 @@ function App() {
   const [dice, setDice] = useState(() => allNewDice());
 
   function allNewDice() {
-    const initialArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    return initialArray.map((number) => Math.floor(Math.random() * 6 + 1));
+    const initialArray = [];
+
+    for (let i = 0; i < 10; i++) {
+      initialArray.push({
+        value: Math.floor(Math.random() * 6 + 1),
+        isHeld: false,
+      });
+    }
+
+    return initialArray;
   }
+
   function rollDice() {
     setDice(allNewDice());
   }
 
   const diceElements = dice.map((die) => {
-    return <Die value={die} />;
+    return <Die value={die.value} />;
   });
 
   return (
