@@ -1,6 +1,6 @@
-export default function Die({ value }) {
+export default function Die({ value, isHeld }) {
   return (
-    <div className="die">
+    <div className={isHeld ? "die die--match" : "die"}>
       <h2 className="die__number">{value}</h2>
     </div>
   );
