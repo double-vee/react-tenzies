@@ -5,15 +5,19 @@ import Die from "./components/Die";
 function App() {
   const [dice, setDice] = useState(() => allNewDice());
 
+  function generateNewDie() {
+    return {
+      value: Math.floor(Math.random() * 6 + 1),
+      isHeld: false,
+      id: nanoid(),
+    };
+  }
+
   function allNewDice() {
     const initialArray = [];
 
     for (let i = 0; i < 10; i++) {
-      initialArray.push({
-        value: Math.floor(Math.random() * 6 + 1),
-        isHeld: false,
-        id: nanoid(),
-      });
+      initialArray.push(generateNewDie());
     }
 
     return initialArray;
@@ -22,9 +26,7 @@ function App() {
   function rollDice() {
     setDice((prevDice) =>
       prevDice.map((die) => {
-        return die.isHeld
-          ? die
-          : { ...die, value: Math.floor(Math.random() * 6 + 1), id: nanoid() };
+        return die.isHeld ? die : generateNewDie();
       })
     );
   }
