@@ -23,8 +23,23 @@ function App() {
     setDice(allNewDice());
   }
 
+  function holdDie(id) {
+    setDice((prevDice) =>
+      prevDice.map((die) => {
+        return id === die.id ? { ...die, isHeld: !die.isHeld } : die;
+      })
+    );
+  }
+
   const diceElements = dice.map((die) => {
-    return <Die key={die.id} value={die.value} isHeld={die.isHeld} />;
+    return (
+      <Die
+        key={die.id}
+        value={die.value}
+        isHeld={die.isHeld}
+        hold={() => holdDie(die.id)}
+      />
+    );
   });
 
   return (
