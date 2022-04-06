@@ -5,6 +5,8 @@
   --bg-color-match: #59E391;
   --bg-color-btn: #5035FF;
   --bg-color-btn-hover: #442cdd;
+  --txt-color: #4A4E74;
+  --title-color: #2B283A;
 }
 
 * {
@@ -38,6 +40,25 @@ html, body, #root {
   background-color: var(--bg-color-light);
 }
 
+.title {
+  color: var(--title-color);
+  font-family: 'Karla';
+  font-size: 1.6rem;
+  line-height: 1.5;
+  letter-spacing: -0.025rem;
+}
+
+.instructions {
+  max-width: 80%;
+  color: var(--txt-color);
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  letter-spacing: -0.015rem;
+  text-align: center;
+}
+
 .dice-container {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
@@ -62,13 +83,13 @@ html, body, #root {
 }
 
 .die__number {
+  color: var(--title-color);
   font-family: 'Karla', sans-serif;
   font-size: 2rem;
-  font-weight: 700;
 }
 
 .roll-btn {
-  padding: 1rem 3rem;
+  padding: 10px 45px;
   border: none;
   border-radius: 8px;
   background-color: var(--bg-color-btn);
