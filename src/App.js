@@ -8,6 +8,7 @@ function App() {
   const [tenzies, setTenzies] = useState(false);
   const [start, setStart] = useState(false);
   const [firstGame, setFirstGame] = useState(true);
+  const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -19,6 +20,17 @@ function App() {
       setTenzies(true);
     }
   }, [dice]);
+
+  useEffect(() => {
+    if (start) {
+      const timeout = setTimeout(() => {
+        setTimer((prevTimer) => prevTimer + 1);
+        console.log(timer);
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [start, timer]);
 
   function generateNewDie() {
     return {
@@ -42,6 +54,7 @@ function App() {
     if (tenzies) {
       setDice(allNewDice());
       setTenzies(false);
+      setTimer(0);
       setStart(true);
     } else if (firstGame) {
       setDice(allNewDice());
