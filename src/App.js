@@ -106,6 +106,12 @@ function App() {
     <div className="container">
       <main className="main">
         {tenzies && <Confetti />}
+        <div className="times">
+          <h2 className="time">Time: {timer}</h2>
+          <h2 className="time">
+            Best time: {times.length > 0 ? times.sort((x, y) => x - y)[0] : `–`}
+          </h2>
+        </div>
         <h1 className="title">Tenzies</h1>
         <p className="instructions">
           Roll until all dice are the same. Click each die to freeze it at its
