@@ -6,6 +6,8 @@ import Die from "./components/Die";
 function App() {
   const [dice, setDice] = useState(() => allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const [start, setStart] = useState(false);
+  const [firstGame, setFirstGame] = useState(true);
 
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -13,6 +15,7 @@ function App() {
     const allValuesEqual = dice.every((die) => die.value === firstValue);
 
     if (allDiceHeld && allValuesEqual) {
+      setStart(false);
       setTenzies(true);
     }
   }, [dice]);
@@ -39,6 +42,11 @@ function App() {
     if (tenzies) {
       setDice(allNewDice());
       setTenzies(false);
+      setStart(true);
+    } else if (firstGame) {
+      setDice(allNewDice());
+      setStart(true);
+      setFirstGame(false);
     } else {
       setDice((prevDice) =>
         prevDice.map((die) => {
@@ -78,7 +86,7 @@ function App() {
         </p>
         <div className="dice-container">{diceElements}</div>
         <button className="roll-btn" onClick={rollDice}>
-          {tenzies ? "New game" : "Roll"}
+          {tenzies || firstGame ? "Play" : "Roll"}
         </button>
       </main>
     </div>
