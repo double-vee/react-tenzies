@@ -28,7 +28,6 @@ function App() {
     if (start) {
       const timeout = setTimeout(() => {
         setTimer((prevTimer) => prevTimer + 1);
-        console.log(timer);
       }, 1000);
 
       return () => clearTimeout(timeout);
@@ -43,7 +42,12 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("times", JSON.stringify(times));
-    console.log(times);
+
+    if (times.length > 10) {
+      let bestTime = times.sort((x, y) => x - y)[0];
+      setTimes([bestTime]);
+      localStorage.setItem("times", JSON.stringify(times));
+    }
   }, [times]);
 
   function generateNewDie() {
