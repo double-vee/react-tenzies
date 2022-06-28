@@ -9,6 +9,9 @@ function App() {
   const [start, setStart] = useState(false);
   const [firstGame, setFirstGame] = useState(true);
   const [timer, setTimer] = useState(0);
+  const [times, setTimes] = useState(
+    () => JSON.parse(localStorage.getItem("times")) || []
+  );
 
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -31,6 +34,17 @@ function App() {
       return () => clearTimeout(timeout);
     }
   }, [start, timer]);
+
+  useEffect(() => {
+    if (tenzies) {
+      setTimes((prevTimes) => [...prevTimes, timer]);
+    }
+  }, [tenzies, timer]);
+
+  useEffect(() => {
+    localStorage.setItem("times", JSON.stringify(times));
+    console.log(times);
+  }, [times]);
 
   function generateNewDie() {
     return {
